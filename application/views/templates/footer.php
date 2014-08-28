@@ -7,7 +7,7 @@
  */-->
 
     <!-- Copyright -->
-    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
         <div class="container">
             <div class="navbar-header navbar-left">
                 <p class="navbar-text small"><?=$this->lang->line('copyright1')?></p>

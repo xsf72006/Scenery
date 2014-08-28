@@ -50,26 +50,19 @@ class User_model extends CI_Model {
     public function user_verified()
     {
         $this->db->where('username', $this->input->post('username'));
-        $this->db->where('passwd', $this->input->post('passwd'));
+        $this->db->where('passwd', sha1($this->input->post('password')));
         $this->db->from('user');
         if ($this->db->count_all_results() === 1)
-        {
             return TRUE;
-        }
         else
-        {
             return FALSE;
-        }
     }
 
     public function is_admin()
     {
-        $this->db->select('privilege');
-        $this->db->where('username', $this->input->post('username'));
-        $this->db->where('passwd', $this->input->post('passwd'));
-        $query = $this->db->get('user');
-        $row = $query->result();
-        if ($row['privilege'] != 0)
+        $query = $this->db->query("SELECT * FROM user WHERE username = '".$this->input->post('username')."' AND passwd = SHA1('".$this->input->post('password')."')");
+        $row = $query->row();
+        if ($row->privilege != 0)
             return TRUE;
         else
             return FALSE;
@@ -77,12 +70,9 @@ class User_model extends CI_Model {
 
     public function is_superadmin()
     {
-        $this->db->select('privilege');
-        $this->db->where('username', $this->input->post('username'));
-        $this->db->where('passwd', $this->input->post('passwd'));
-        $query = $this->db->get('user');
-        $row = $query->result();
-        if ($row['privilege'] == 2)
+        $query = $this->db->query("SELECT * FROM user WHERE username = '".$this->input->post('username')."' AND passwd = SHA1('".$this->input->post('password')."')");
+        $row = $query->row();
+        if ($row->privilege == 2)
             return TRUE;
         else
             return FALSE;

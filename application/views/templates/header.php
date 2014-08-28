@@ -22,10 +22,16 @@
     <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+        body{
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigator -->
-    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
@@ -38,13 +44,13 @@
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li <?php if ($active == "scenery") echo 'class = "active"'; ?>><?=anchor('scenery',$this->lang->line('overview'));?></li>
-                    <li <?php if ($active == "news") echo 'class = "active"'; ?>><?=anchor('news',$this->lang->line('news'))?></li>
-                    <li <?php if ($active == "statistic") echo 'class = "active"'; ?>><?=anchor('statistic',$this->lang->line('statistic'))?></li>
+                    <li <?php if (strpos($active, 'scenery') === 0) echo 'class = "active"'; ?>><?=anchor('scenery',$this->lang->line('overview'));?></li>
+                    <li <?php if (strpos($active, 'news') === 0) echo 'class = "active"'; ?>><?=anchor('news',$this->lang->line('news'))?></li>
+                    <li <?php if (strpos($active, 'statistic') === 0) echo 'class = "active"'; ?>><?=anchor('statistic',$this->lang->line('statistic'))?></li>
                     <?php
                     if ($this->session->userdata('is_admin') === TRUE):
                     ?>
-                        <li class="dropdown <?php if ($active == "admin") echo 'active'; ?>">
+                        <li class="dropdown <?php if (strpos($active, 'admin') === 0) echo 'active'; ?>">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><?=$this->lang->line('admin')?><span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <?php
@@ -65,51 +71,19 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <p class="navbar-text"><?=$this->lang->line('welcome').anchor("main/login", $this->session->userdata('username'))?>
-                        </p>
+                        <?php
+                        if (!$this->session->userdata('logged_in')):
+                        ?>
+                        <p class="navbar-text"><?=$this->lang->line('welcome').$this->session->userdata('username').' '.anchor("main/login/".$active, $this->lang->line('login'))?></p>
+                        <?php
+                        else:
+                        ?>
+                        <p class="navbar-text"><?=$this->lang->line('welcome').$this->session->userdata('username').' '.anchor("main/logout/".$active, $this->lang->line('logout'))?></p>
+                        <?php
+                        endif;
+                        ?>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-<!--    <!-- Modal -->
-<!--    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-<!--        <div class="modal-dialog">-->
-<!--            <div class="modal-content">-->
-<!--                --><?//=form_open('/', array('class' => 'form-horizontal',
-//                                        'role' => 'form'))?>
-<!--                <div class="modal-header">-->
-<!--                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
-<!--                    <h4 class="modal-title" id="myModalLabel">--><?//=$this->lang->line('login');?><!--</h4>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="inputName" class="col-sm-5 control-label">--><?//=$this->lang->line('username')?><!--</label>-->
-<!--                        <div class="col-sm-4">-->
-<!--                            <input type="text" class="form-control" name="username">--><?//=form_error('username')?>
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="inputPassword" class="col-sm-5 control-label">--><?//=$this->lang->line('password')?><!--</label>-->
-<!--                        <div class="col-sm-4">-->
-<!--                            <input type="password" class="form-control" name="passwd">--><?//=form_error('password')?>
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <div class="col-sm-offset-5 col-sm-4">-->
-<!--                            <div class="checkbox">-->
-<!--                                <label>-->
-<!--                                    <input type="checkbox" name="remember" value="1">--><?//=$this->lang->line('remember')?>
-<!--                                </label>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-default" data-dismiss="modal">--><?//=$this->lang->line('cancel');?><!--</button>-->
-<!--                    <button type="submit" class="btn btn-primary" name="submit">--><?//=$this->lang->line('login');?><!--</button>-->
-<!--                </div>-->
-<!--                </form>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->

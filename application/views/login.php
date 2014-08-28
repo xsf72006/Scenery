@@ -10,7 +10,7 @@
     <br><br><br><br><br><br><br>
     <div class="row">
         <?php
-        echo form_open('main/login', array('class'=>'form-horizontal', 'role'=>'form')); ?>
+        echo form_open('main/login/'.$active, array('class'=>'form-horizontal', 'role'=>'form')); ?>
         <div class="form-group">
             <label for="inputName" class="col-sm-4 control-label"><?=$this->lang->line('username');?></label>
             <div class="col-sm-4">
@@ -38,7 +38,7 @@
         if ($logerror == TRUE):
             ?>
             <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-4 alert alert-danger" role="alert"><?=$this->lang->line('logerror');?></div>
+                <span class="col-sm-offset-4 col-sm-4 alert alert-danger" role="alert"><?=$this->lang->line('logerror');?></span>
             </div>
         <?php
         endif;

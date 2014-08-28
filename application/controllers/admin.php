@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        if (!isset($_SESSION['username']))
+        if (!$this->session->userdata('username'))
         {
             $user = array(
                 'username'  => $this->lang->line('tourist'),
@@ -23,7 +23,9 @@ class Admin extends CI_Controller {
     }
     public function user()
     {
-        $data['active'] = "admin";
+        if ($this->session->userdata('is_superadmin') === FALSE)
+            redirect("/");
+        $data['active'] = "admin/user";
         $this->load->view('templates/header', $data);
         $this->load->view('scenery.php');
         $this->load->view('templates/footer');
@@ -31,7 +33,9 @@ class Admin extends CI_Controller {
 
     public function scenery()
     {
-        $data['active'] = "admin";
+        if ($this->session->userdata('is_admin') === FALSE)
+            redirect("/");
+        $data['active'] = "admin/scenery";
         $this->load->view('templates/header', $data);
         $this->load->view('scenery.php');
         $this->load->view('templates/footer');
@@ -39,7 +43,9 @@ class Admin extends CI_Controller {
 
     public function category()
     {
-        $data['active'] = "admin";
+        if ($this->session->userdata('is_admin') === FALSE)
+            redirect("/");
+        $data['active'] = "admin/category";
         $this->load->view('templates/header', $data);
         $this->load->view('scenery.php');
         $this->load->view('templates/footer');
@@ -47,7 +53,9 @@ class Admin extends CI_Controller {
 
     public function news()
     {
-        $data['active'] = "admin";
+        if ($this->session->userdata('is_admin') === FALSE)
+            redirect("/");
+        $data['active'] = "admin/news";
         $this->load->view('templates/header', $data);
         $this->load->view('scenery.php');
         $this->load->view('templates/footer');
