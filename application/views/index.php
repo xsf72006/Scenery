@@ -55,17 +55,13 @@
         <div class="col-sm-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    新闻与公告
+                    新闻与公告<span class="glyphicon glyphicon-bullhorn"></span>
                 </div>
-                <div class="panel-body">
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?>
+                <div class="panel-body list-group">
+                    <?php
+                    foreach ($news as $news_item)
+                        echo anchor('news/show/'.$news_item['id'], $news_item['title'], array('class' => 'list-group-item', 'target' => '_blank'));
+                    ?>
                 </div>
                 <div class="panel-footer text-right">
                     <?=anchor('news','更多');?>
@@ -75,17 +71,17 @@
         <div class="col-sm-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    热门景点
+                    热门景点<span class="glyphicon glyphicon-fire"></span>
                 </div>
-                <div class="panel-body">
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?><br>
-                    <?=anchor('/', "测试")?>
+                <div class="panel-body list-group">
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
+                    <?=anchor('/', "测试", array('class' => 'list-group-item'))?>
                 </div>
                 <div class="panel-footer text-right">
                     <?=anchor('scenery','更多');?>

@@ -14,13 +14,24 @@ class User_model extends CI_Model {
 
     public function set_user()
     {
+        if ($this->input->post('set_admin') == 1)
+        {
+            $privilege = 1;
+        }
+        else
+        {
+            $privilege = 0;
+        }
         $data = array(
             'username' => $this->input->post('username'),
-            'passwd' => sha1($this->input->post('passwd')),
-            'privilege' => 0
+            'passwd' => sha1($this->input->post('password')),
+            'privilege' => $privilege
         );
 
-        return $this->db->insert('user', $data);
+        if ($this->db->insert('user', $data))
+            return TRUE;
+        else
+            return FALSE;
     }
 
     public function set_user_privilege()
@@ -37,14 +48,24 @@ class User_model extends CI_Model {
         return $this->db->delete('user', array('id' => $this->input->post('id')));
     }
 
+    public function get_admin_user_list()
+    {
+        $this->db->where_in('privilege', array(1));
+        $query = $this->db->get('user');
+        return $query->result_array();
+    }
+
     public function get_user_list()
     {
-        return $this->db->get('user');
+        $this->db->where_in('privilege', array(0));
+        $query = $this->db->get('user');
+        return $query->result_array();
     }
 
     public function get_username_by_id()
     {
-        return $this->db->get_where('user', array('id' => $this->input->post('id')));
+        $query = $this->db->get_where('user', array('id' => $this->input->post('id')));
+        return $query->result_array();
     }
 
     public function user_verified()

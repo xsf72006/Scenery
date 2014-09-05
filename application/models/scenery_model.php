@@ -35,12 +35,14 @@ class Scenery_model extends CI_Model {
 
     public function get_scenery_list()
     {
-        return $this->db->get('scenery');
+        $query = $this->db->get('scenery');
+        return $query->result_array();
     }
 
     public function get_scenery_by_id()
     {
-        return $this->db->get_where('scenery', array('id' => $this->input->post('id')));
+        $query = $this->db->get_where('scenery', array('id' => $this->input->post('id')));
+        return $query->result_array();
     }
 }
 

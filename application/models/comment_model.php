@@ -29,7 +29,8 @@ class Comment_model extends CI_Model {
 
     public function get_comments_list_by_sid()
     {
-        return $this->db->get_where('comment', array('sid' => $this->input->post('sid')));
+        $query = $this->db->get_where('comment', array('sid' => $this->input->post('sid')));
+        return $query->result_array();
     }
 }
 

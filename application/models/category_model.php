@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: timmyxu
- * Date: 14-8-24
- * Time: 下午3:55
+ * Date: 14-9-5
+ * Time: 下午3:02
  */
 
 class Category_model extends CI_Model {
@@ -12,31 +12,15 @@ class Category_model extends CI_Model {
         parent::__construct();
     }
 
-    public function set_category()
+    public function get_category()
     {
-        $data = array(
-            'fid' => $this->input->post('fid'),
-            'cname' => $this->input->post('cname')
-        );
-
-        return $this->db->insert('category', $data);
+        $query = $this->db->get('category');
+        return $query->result_array();
     }
 
-    public function delete_category()
+    public function get_category_by_id($id)
     {
-        return $this->db->delete('category', array('id' => $this->input->post('id')));
-    }
-
-    public function get_category_list()
-    {
-        return $this->db->get('category');
-    }
-
-    public function get_category_by_id($cid)
-    {
-        return $this->db->get_where('category', array('id' => $this->input->post('id')));
+        $query = $this->db->get_where('category', array('id' => $id));
+        return $query->row_array();
     }
 }
-
-/* End of file category_model.php */
-/* Location: ./application/models/category_model.php */

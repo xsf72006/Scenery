@@ -20,6 +20,7 @@ class Main extends CI_Controller {
             $this->session->set_userdata($user);
         }
         $data['active'] = "/";
+        $data['news'] = $this->news_model->get_10news();
         $this->load->view('templates/header', $data);
         $this->load->view('index.php');
         $this->load->view('templates/footer');

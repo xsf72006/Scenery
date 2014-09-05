@@ -23,7 +23,13 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?=base_url()?>js/bootstrap.min.js"></script>
 <script type="javascript">
-
+    $(document).ready(function(){
+        $('#sidebar').affix({
+            offset: {
+                top: $('nav').height()
+            }
+        });
+    })
 </script>
 </body>
 </html>

@@ -30,7 +30,8 @@ class Subscenery_model extends CI_Model {
 
     public function get_subscenery_list()
     {
-        return $this->db->get('subscenery');
+        $query = $this->db->get('subscenery');
+        return $query->result_array();
     }
 }
 
