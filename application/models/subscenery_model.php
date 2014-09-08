@@ -12,25 +12,57 @@ class Subscenery_model extends CI_Model {
         parent::__construct();
     }
 
-    public function set_subscenery()
+    private function set_upload_options($i)
     {
-        $data = array(
-            'fid' => $this->input->post('fid'),
-            'img' => $this->input->post('img'),
-            'summary' => $this->input->post('summary')
-        );
-
-        return $this->db->insert('subscenery', $data);
+//  upload an image options
+        $config = array();
+        $time = time();
+        $config['upload_path'] = './uploads/subscenery/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['file_name'] = $time.$i;
+        return $config;
     }
 
-    public function delete_subscenery()
+    public function set_subscenery($fid)
     {
-        return $this->db->delete('subscenery', array('id' => $this->input->post('id')));
+        $subname = $this->input->post('subscenery');
+        $subsummary = $this->input->post('subsummary');
+        $files = $_FILES;
+        $cnt = count($subname);
+        for ($i = 0;$i < $cnt;$i++)
+        {
+            $_FILES['userfile']['name']= $files['subimg']['name'][$i];
+            $_FILES['userfile']['type']= $files['subimg']['type'][$i];
+            $_FILES['userfile']['tmp_name']= $files['subimg']['tmp_name'][$i];
+            $_FILES['userfile']['error']= $files['subimg']['error'][$i];
+            $_FILES['userfile']['size']= $files['subimg']['size'][$i];
+            $this->upload->initialize($this->set_upload_options($i));
+            if ($this->upload->do_upload())
+            {
+                $udata = $this->upload->data();
+                $data = array(
+                    'name' => $subname[$i],
+                    'summary' => nl2br($subsummary[$i]),
+                    'img' => $udata['file_name'],
+                    'fid' => $fid
+                );
+                if (!$this->db->insert('subscenery',$data))
+                    return FALSE;
+            }
+            else
+                return FALSE;
+        }
+        return TRUE;
     }
 
-    public function get_subscenery_list()
+    public function delete_subscenery($fid)
     {
-        $query = $this->db->get('subscenery');
+        $this->db->delete('subscenery', array('fid' => $fid));
+    }
+
+    public function get_subscenery_list($fid)
+    {
+        $query = $this->db->get_where('subscenery', array('fid' => $fid));
         return $query->result_array();
     }
 }

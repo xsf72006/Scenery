@@ -21,8 +21,9 @@ class Main extends CI_Controller {
         }
         $data['active'] = "/";
         $data['news'] = $this->news_model->get_10news();
+        $data['scenery'] = $this->scenery_model->get_10scenery();
         $this->load->view('templates/header', $data);
-        $this->load->view('index.php');
+        $this->load->view('index');
         $this->load->view('templates/footer');
     }
 

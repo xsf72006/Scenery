@@ -43,9 +43,9 @@ class User_model extends CI_Model {
         return $this->db->update('user', $data);
     }
 
-    public function delete_user()
+    public function delete_user($id)
     {
-        return $this->db->delete('user', array('id' => $this->input->post('id')));
+        $this->db->delete('user', array('id' => $id));
     }
 
     public function get_admin_user_list()

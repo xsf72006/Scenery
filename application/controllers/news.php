@@ -49,6 +49,12 @@ class News extends CI_Controller {
         $this->load->view('shownews');
         $this->load->view('templates/footer');
     }
+
+    public function delete($id)
+    {
+        $this->news_model->delete_news($id);
+        redirect('admin/newslist');
+    }
 }
 
 /* End of file news.php */

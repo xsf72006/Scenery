@@ -15,7 +15,7 @@
     if (!empty($news['img'])):
     ?>
     <div class="text-center">
-        <img src="<?=base_url()?>/uploads/news/<?=$news['img']?>" width="300px" height="300px"/>
+        <img src="<?=base_url()?>/uploads/news/<?=$news['img']?>" height="300px"/>
     </div>
     <br>
     <?php

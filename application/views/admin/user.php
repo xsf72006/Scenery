@@ -8,7 +8,7 @@
 
 <!-- SideBar -->
 <div class="col-md-3">
-    <div class="list-group affix" id="sidebar">
+    <div class="list-group affix vleft" id="sidebar">
         <?php
         $c1 = "list-group-item";
         $c2 = "list-group-item";
@@ -95,6 +95,7 @@
                 <tr>
                     <th style="width: 10%">#</th>
                     <th><?=$this->lang->line('username');?></th>
+                    <th><?=$this->lang->line('manage')?></th>
                 </tr>
             </thead>
             <tbody>
@@ -106,6 +107,7 @@
                 <tr>
                     <td style="width: 10%"><?=$i?></td>
                     <td><?=$row['username']?></td>
+                    <td><?=anchor('user/delete/'.$row['id'].'/'.$type, $this->lang->line('delete'), array('onclick' => "return confirm('".$this->lang->line('confirmdelete')."')"))?></td>
                 </tr>
             <?php
             endforeach;

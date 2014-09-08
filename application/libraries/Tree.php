@@ -22,7 +22,7 @@ class Tree{
      * 生成树型结构所需修饰符号，可以换成图片
      * @var array
      */
-    public $icon = array('│',' ├','└');
+    public $icon = array('','','');
     public $nbsp = " ";
 
     /**
@@ -194,7 +194,7 @@ class Tree{
                     eval("\$nstr = \"$str2\";");
                 }
                 $this->ret .= $nstr;
-                $this->get_tree_category($id, $str, $str2, $sid, $adds.$k.' ');
+                $this->get_tree_category($id, $str, $str2, $sid, $adds.$k.'——');
                 $number++;
             }
         }

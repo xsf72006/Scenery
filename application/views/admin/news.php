@@ -8,7 +8,7 @@
 
 <!-- SideBar -->
 <div class="col-md-3">
-    <div class="list-group affix" id="sidebar">
+    <div class="list-group affix vleft" id="sidebar">
         <?=anchor("admin/news", $this->lang->line('addnews'), array('class' => "list-group-item list-group-item-info"))?>
         <?=anchor("admin/newslist", $this->lang->line('newslist'), array('class' => "list-group-item"))?>
     </div>

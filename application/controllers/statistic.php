@@ -26,7 +26,7 @@ class Statistic extends CI_Controller {
     {
         $data['active'] = "statistic";
         $this->load->view('templates/header', $data);
-        $this->load->view('scenery.php');
+        $this->load->view('statistic');
         $this->load->view('templates/footer');
     }
 }

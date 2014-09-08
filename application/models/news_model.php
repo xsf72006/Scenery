@@ -14,7 +14,7 @@ class News_model extends CI_Model {
 
     public function set_news()
     {
-        if (!empty($_FILES))
+        if ($this->input->post('img') != "")
         {
             $time = time();
             $config['upload_path'] = './uploads/news/';
@@ -29,7 +29,7 @@ class News_model extends CI_Model {
                     'author' => $this->session->userdata('username'),
                     'img' => $udata['file_name'],
                     'category' => $this->input->post('category'),
-                    'content' => $this->input->post('content')
+                    'content' => nl2br($this->input->post('content'))
                 );
                 return $this->db->insert('news', $data);
             }
@@ -42,15 +42,15 @@ class News_model extends CI_Model {
                 'title' => $this->input->post('title'),
                 'author' => $this->session->userdata('username'),
                 'category' => $this->input->post('category'),
-                'content' => $this->input->post('content')
+                'content' => nl2br($this->input->post('content'))
             );
             return $this->db->insert('news', $data);
         }
     }
 
-    public function delete_news()
+    public function delete_news($id)
     {
-        return $this->db->delete('news', array('id' => $this->input->post('id')));
+        $this->db->delete('news', array('id' => $id));
     }
 
     public function get_news()

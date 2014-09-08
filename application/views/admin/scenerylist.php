@@ -8,7 +8,7 @@
 
 <!-- SideBar -->
 <div class="col-md-3">
-    <div class="list-group affix" id="sidebar">
+    <div class="list-group affix vleft" id="sidebar">
         <?=anchor("admin/scenery", $this->lang->line('addscenery'), array('class' => "list-group-item"))?>
         <?=anchor("admin/scenerylist", $this->lang->line('scenerylist'), array('class' => "list-group-item list-group-item-info"))?>
     </div>
@@ -21,7 +21,6 @@
         <tr>
             <th style="width: 10%">#</th>
             <th><?=$this->lang->line('sceneryname');?></th>
-            <th><?=$this->lang->line('category');?></th>
             <th><?=$this->lang->line('manage');?></th>
         </tr>
         </thead>
@@ -32,10 +31,9 @@
             $i++;
             ?>
             <tr>
-                <td style="width: 10%"><?=$i?></td>
-                <td><?=$row['sname']?></td>
-                <td><?=$row['category']?></td>
-                <td><?=$this->lang->line('edit').' '.$this->lang->line('delete');?></td>
+                <td><?=$i?></td>
+                <td><?=anchor('scenery/show/'.$row['id'], $row['sname'], array('target' => '_blank'))?></td>
+                <td><?=anchor('scenery/delete/'.$row['id'], $this->lang->line('delete'), array('onclick' => "return confirm('".$this->lang->line('confirmdelete')."')"))?></td>
             </tr>
         <?php
         endforeach;

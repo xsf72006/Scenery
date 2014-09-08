@@ -26,7 +26,6 @@
         @media (min-width: 979px) {
             #sidebar.affix-top {
                 position: static;
-                margin-top:60px;
                 width:228px;
             }
 
@@ -40,10 +39,23 @@
         .affix,.affix-top {
             position:static;
         }
-        body .col-md-9{
+        body{
+            font-family: Monospace, sans-serif;
             padding-top: 60px;
             padding-bottom: 60px;
         }
+        .col-md-9{
+
+            padding-bottom: 60px;
+        }
+        .vleft{
+            border-right: 2px double #7DC3FF;
+        }
+
+        .list-group-item{
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -77,6 +89,7 @@
                                 <?php
                                 endif;
                                 ?>
+                                <li><?=anchor("admin/category", $this->lang->line('category_admin'))?></li>
                                 <li><?=anchor("admin/scenery", $this->lang->line('scenery_admin'))?></li>
                                 <li><?=anchor("admin/news", $this->lang->line('news_admin'))?></li>
                             </ul>
