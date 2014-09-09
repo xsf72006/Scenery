@@ -53,7 +53,10 @@ class Main extends CI_Controller {
                 $this->session->set_userdata('logged_in', TRUE);
                 $this->session->set_userdata('is_admin', $this->user_model->is_admin());
                 $this->session->set_userdata('is_superadmin', $this->user_model->is_superadmin());
-                redirect($active.'/'.$active2);
+                if (is_numeric($active2))
+                    redirect($active.'/show/'.$active2);
+                else
+                    redirect($active.'/'.$active2);
             }
             else
             {
@@ -72,7 +75,10 @@ class Main extends CI_Controller {
         $this->session->set_userdata('logged_in', FALSE);
         $this->session->set_userdata('is_admin', FALSE);
         $this->session->set_userdata('is_superadmin', FALSE);
-        redirect($active.'/'.$active2);
+        if (is_numeric($active2))
+            redirect($active.'/show/'.$active2);
+        else
+            redirect($active.'/'.$active2);
     }
 }
 

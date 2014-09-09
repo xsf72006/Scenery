@@ -11,12 +11,12 @@ class Comment_model extends CI_Model {
         parent::__construct();
     }
 
-    public function set_comment()
+    public function set_comment($sid)
     {
         $data = array(
-            'sid' => $this->input->post('sid'),
-            'author' => $this->input->post('author'),
-            'content' => $this->input->post('content')
+            'sid' => $sid,
+            'author' => $this->session->userdata('username'),
+            'content' => $this->input->post('comment')
         );
 
         return $this->db->insert('comment', $data);
@@ -27,9 +27,9 @@ class Comment_model extends CI_Model {
         return $this->db->delete('comment', array('id' => $this->input->post('id')));
     }
 
-    public function get_comments_list_by_sid()
+    public function get_comments_list_by_sid($sid)
     {
-        $query = $this->db->get_where('comment', array('sid' => $this->input->post('sid')));
+        $query = $this->db->get_where('comment', array('sid' => $sid));
         return $query->result_array();
     }
 }

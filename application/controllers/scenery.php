@@ -36,9 +36,25 @@ class Scenery extends CI_Controller {
         $data['active'] = 'scenery';
         $data['scenery'] = $this->scenery_model->get_scenery_by_id($id);
         $data['subscenery'] = $this->subscenery_model->get_subscenery_list($data['scenery']['id']);
-        $this->load->view('templates/header', $data);
-        $this->load->view('showscenery');
-        $this->load->view('templates/footer');
+        $data['sid'] = $id;
+
+        $this->form_validation->set_error_delimiters('<span class="label label-danger">', '</span>');
+        $this->form_validation->set_rules('comment', $this->lang->line('commentlist'), 'required');
+        if ($this->form_validation->run() === FALSE)
+        {
+            $data['comment'] = $this->comment_model->get_comments_list_by_sid($id);
+            $this->load->view('templates/header', $data);
+            $this->load->view('showscenery');
+            $this->load->view('templates/footer');
+        }
+        else
+        {
+            $this->comment_model->set_comment($id);
+            $data['comment'] = $this->comment_model->get_comments_list_by_sid($id);
+            $this->load->view('templates/header', $data);
+            $this->load->view('showscenery');
+            $this->load->view('templates/footer');
+        }
     }
 
     public function delete($id)

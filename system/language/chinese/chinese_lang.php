@@ -63,6 +63,11 @@ $lang['parentc'] = "父类";
 $lang['none'] = "无";
 $lang['confirmdelete'] = "确认删除？";
 $lang['deletecategory'] = "若删除分类，将删除该分类下的所有子类。确认删除？";
+$lang['commentlist'] = "评论区";
+$lang['commentp'] = "健康上网，文明评论";
+$lang['comment'] = "发表评论";
+$lang['please'] = "请";
+$lang['aftercomment'] = "后再评论";
 
 /* End of file chinese_lang.php */
 /* Location: ./system/language/chinese/chinese_lang.php */
