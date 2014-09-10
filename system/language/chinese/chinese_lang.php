@@ -32,6 +32,7 @@ $lang['addsuccess'] = "添加成功！";
 $lang['delete'] = "删除";
 $lang['addscenery'] = "添加景点";
 $lang['scenerylist'] = "景点列表";
+$lang['scenerysearch'] = "景点搜索";
 $lang['sceneryname'] = "景点名称";
 $lang['summary'] = "景点简介";
 $lang['sceneryimg'] = "景点图片";

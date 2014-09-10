@@ -67,10 +67,31 @@ class Scenery_model extends CI_Model {
         return $query->result_array();
     }
 
+    public function search_scenery()
+    {
+        $this->db->like('sname', $this->input->post('sname'));
+        $this->db->like('categoryname', $this->input->post('category'));
+        $this->db->like('position', $this->input->post('position'));
+        $this->db->like('bus', $this->input->post('bus'));
+        $query = $this->db->get('scenery');
+        return $query->result_array();
+    }
+
     public function get_scenery_by_id($id)
     {
         $query = $this->db->get_where('scenery', array('id' => $id));
         return $query->row_array();
+    }
+
+    public function add_click($id)
+    {
+        $scenery = $this->scenery_model->get_scenery_by_id($id);
+        $click = $scenery['click'];
+        $data = array(
+            'click' => $click+1
+        );
+        $this->db->where('id', $id);
+        $this->db->update('scenery', $data);
     }
 }
 

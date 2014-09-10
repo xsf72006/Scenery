@@ -87,6 +87,17 @@ class News_model extends CI_Model {
         $query = $this->db->get_where('news', array('id' => $id));
         return $query->row_array();
     }
+
+    public function add_click($id)
+    {
+        $news = $this->news_model->get_news_by_id($id);
+        $click = $news['click'];
+        $data = array(
+            'click' => $click+1
+        );
+        $this->db->where('id', $id);
+        $this->db->update('news', $data);
+    }
 }
 
 /* End of file news_model.php */

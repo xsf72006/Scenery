@@ -25,7 +25,7 @@ class Scenery extends CI_Controller {
     public function index()
     {
         $data['active'] = "scenery";
-        $data['scenery'] = $this->scenery_model->get_scenery_list();
+        $data['scenery'] = $this->scenery_model->search_scenery();
         $this->load->view('templates/header', $data);
         $this->load->view('scenery');
         $this->load->view('templates/footer');
@@ -37,6 +37,7 @@ class Scenery extends CI_Controller {
         $data['scenery'] = $this->scenery_model->get_scenery_by_id($id);
         $data['subscenery'] = $this->subscenery_model->get_subscenery_list($data['scenery']['id']);
         $data['sid'] = $id;
+        $this->scenery_model->add_click($id);
 
         $this->form_validation->set_error_delimiters('<span class="label label-danger">', '</span>');
         $this->form_validation->set_rules('comment', $this->lang->line('commentlist'), 'required');

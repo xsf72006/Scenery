@@ -45,6 +45,7 @@ class News extends CI_Controller {
     {
         $data['active'] = "news";
         $data['news'] = $this->news_model->get_news_by_id($id);
+        $this->news_model->add_click($id);
         $this->load->view('templates/header', $data);
         $this->load->view('shownews');
         $this->load->view('templates/footer');
